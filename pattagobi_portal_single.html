@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💌 Pattagobi's Grievance Portal 💌</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .box {
+      background-color: #ffd1dc;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+    h2, p {
+      text-align: center;
+      color: #d63384;
+      animation: pulse 4s infinite;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff1493;
+      box-shadow: 0 0 10px #ff69b4;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .box:hover {
+      box-shadow: 0 0 25px #ff1493;
+    }
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      animation: float 6s infinite;
+      color: #ff69b4;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    #thankYou {
+      display: none;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #d63384;
+    }
+  </style>
+  <script>
+    function showThankYou(event) {
+      event.preventDefault();
+      const form = document.getElementById("grievanceForm");
+      const data = new FormData(form);
+      fetch("https://formsubmit.co/ajax/raghavbali3918@gmail.com", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: data
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.display = "none";
+          document.getElementById("thankYou").style.display = "block";
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="heart" style="left:10%">💖</div>
+  <div class="heart" style="left:30%">💕</div>
+  <div class="heart" style="left:50%">💗</div>
+  <div class="heart" style="left:70%">💘</div>
+  <div class="heart" style="left:90%">💞</div>
+
+  <div class="box">
+    <h2>💌 Pattagobi's Grievance Portal 💌</h2>
+    <p>Lovingly designed by Ragiii — because even the sweetest hearts have their cloudy days ☁️💖</p>
+    <form id="grievanceForm" onsubmit="showThankYou(event)">
+      <input type="text" name="title" placeholder="📌 Title of your sweet complaint" required>
+      <textarea name="description" rows="4" placeholder="📝 Tell me everything (even the dramatic parts)..." required></textarea>
+      <select name="mood">
+        <option value="angry">😡 Angry like Hulk</option>
+        <option value="hurt">🥺 Hurt and pouty</option>
+        <option value="melting">🫠 Melting with emotion</option>
+        <option value="icy">🧊 Cold stare mode</option>
+        <option value="sad">😔 Sad but cute</option>
+      </select>
+      <label>🚨 Severity (1 to 5)</label>
+      <input type="range" name="severity" min="1" max="5">
+      <input type="text" name="actionRequest" placeholder="🛠 What do you want me to do now?" required>
+      <input type="text" name="durationEstimate" placeholder="⏳ How long will you be like this?" required>
+      <button type="submit">Send to 🧠 Ragiii</button>
+    </form>
+    <div id="thankYou">
+      <h3>💖 Thank you! Your grievance has been sent to Ragiii 💖</h3>
+    </div>
+  </div>
+</body>
+</html>
